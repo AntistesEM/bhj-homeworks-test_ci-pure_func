@@ -1,1 +1,1 @@
-import './js/pure_functions'
+import './js/pure_functions';
