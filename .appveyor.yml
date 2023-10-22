@@ -7,13 +7,14 @@ branches:
     - main  # ветка git
 cache: node_modules  # кэширование
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - ps: Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -NoProfile -NonInteractive -Command "iex((new-object net.webclient).DownloadString(''https://chocolatey.org/install.ps1''))"' -Verb RunAs
-  - choco install nvm
-  - nvm install $env:nodejs_version
-  - ps: [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\ProgramData\nvm", "Machine")
-  - nvm use $env:nodejs_version
-  - node --version
+  - ps: |
+      Install-Product node $env:nodejs_version;
+      Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -NoProfile -NonInteractive -Command "iex((new-object net.webclient).DownloadString(''https://chocolatey.org/install.ps1''))"' -Verb RunAs;
+      choco install nvm;
+      nvm install $env:nodejs_version;
+      [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\ProgramData\nvm", "Machine");
+      nvm use $env:nodejs_version;
+      node --version;
   - npm install  # команда установки зависимостей
 build: off
 test_script:
