@@ -7,6 +7,9 @@ branches:
     - main  # ветка git
 cache: node_modules  # кэширование
 install:
+  - ps: Install-Product node $env:nodejs_version
+  - ps: iex "& { $(irm https://chocolatey.org/install.ps1).Content }"
+  - choco install nvm
   - nvm install $env:nodejs_version
   - nvm use $env:nodejs_version
   - node --version
