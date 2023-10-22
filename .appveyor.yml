@@ -8,7 +8,7 @@ branches:
 cache: node_modules  # кэширование
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: iex "& { $(irm https://chocolatey.org/install.ps1).Content }"
+  - ps: Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -NoProfile -NonInteractive -Command "iex((new-object net.webclient).DownloadString(''https://chocolatey.org/install.ps1''))"' -Verb RunAs
   - choco install nvm
   - nvm install $env:nodejs_version
   - nvm use $env:nodejs_version
